@@ -1,0 +1,46 @@
+@page
+@model FinalProject.Pages_Recipes.Recipe.CreateModel
+
+@{
+    ViewData["Title"] = "Create Recipe";
+}
+
+<h1>Create Recipe</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Recipe.RecipeName" class="control-label"></label>
+                <input asp-for="Recipe.RecipeName" class="form-control" />
+                <span asp-validation-for="Recipe.RecipeName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Recipe.ReleaseDate" class="control-label"></label>
+                <input asp-for="Recipe.ReleaseDate" class="form-control" />
+                <span asp-validation-for="Recipe.ReleaseDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Recipe.MealType" class="control-label"></label>
+                <input asp-for="Recipe.MealType" class="form-control" />
+                <span asp-validation-for="Recipe.MealType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Recipe.Tags" class="control-label"></label>
+                <input asp-for="Recipe.Tags" class="form-control" />
+                <span asp-validation-for="Recipe.Tags" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Recipe.Chef" class="control-label"></label>
+                <select asp-for="Recipe.ChefId" asp-items="@Model.ChefNameList" class="form-control">
+                    <option value="">-- Selecte Chef --</option>
+                </select>
+                <span asp-validation-for="Recipe.ChefId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-2">
+                <input type="submit" value="Create" class="btn  btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

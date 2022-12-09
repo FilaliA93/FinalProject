@@ -1,0 +1,94 @@
+@page
+@model FinalProject.Pages_Recipes.Recipe.IndexModel
+
+@{
+    ViewData["Title"] = "Recipe";
+}
+
+<h1>Welcome to Easy Tasty Bites</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+
+<form asp-page="./Index" method="get">
+    <div class="">
+        <p>
+            Search by Recipe Name:
+            <input type="text" name="search" value="@Model.CurrentSearch" />
+            <input type="submit" value="Search" class="btn  btn-primary" />
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort" asp-route-search="@Model.CurrentSearch"
+                    asp-route-pageIndex="@Model.PageIndex">
+                    @Html.DisplayNameFor(model => model.Recipes[0].RecipeName)
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Recipes[0].ReleaseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Recipes[0].MealType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Recipes[0].Tags)
+            <th>
+            <th>
+                        @Html.DisplayNameFor(model => model.Recipes[0].Chef)
+            <th>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Recipes)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RecipeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReleaseDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MealType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tags)
+                <td>
+                <td>
+                            @Html.DisplayFor(modelItem => item.Chef.ChefName)
+                <td>
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.RecipeId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.RecipeId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.RecipeId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prev = Model.PageIndex == 1 ? "disabled" : "";
+    var next = Model.PageIndex == Model.TotalPages ? "disabled" : "";
+}
+
+<div>
+    <a class="btn btn-primary @prev" asp-page="./Index" asp-route-pageIndex="@(Model.PageIndex - 1)"
+        asp-route-sortOrder="@Model.NameSort" asp-route-search="@Model.CurrentSearch">
+        Previous
+    </a>
+    <a class="btn btn-primary @next" asp-page="./Index" asp-route-pageIndex="@(Model.PageIndex + 1)"
+        asp-route-sortOrder="@Model.NameSort" asp-route-search="@Model.CurrentSearch">
+        Next
+    </a>
+</div>

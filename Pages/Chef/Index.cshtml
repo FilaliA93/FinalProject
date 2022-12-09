@@ -1,0 +1,47 @@
+@page
+@model FinalProject.Pages_Recipes.Chef.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Chefs[0].ChefName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Chefs[0].Recipes[0].RecipeName)
+            </th>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Chefs) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChefName)
+            </td>
+            <td>
+                @for (var i = 0; i < item.Recipes.Count; i++)
+                {
+                    var recipe = item.Recipes[i];
+                    <p>@(i + 1). @recipe.RecipeName</p>
+                }
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ChefId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ChefId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ChefId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
